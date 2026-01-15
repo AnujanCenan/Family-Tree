@@ -1,0 +1,66 @@
+{
+	"people": [
+		{
+			"id": 0,
+			"name": "Cenan Seanthy",
+			"birth_date": [14, 9, 1961],
+			"death_date": [27, 5, 2015],
+			"family_id_is_child": 1,
+			"family_ids_is_parent": [0]
+		},
+		{
+			"id": 1,
+			"name": "Sukanthy Cenan",
+			"birth_date": [12, 12, 1963],
+			"death_date": [-1, -1, -1],
+			"family_id_is_child": -1,
+			"family_ids_is_parent": [0]
+		},
+		{
+			"id": 2,
+			"name": "Ahshvini Cenan",
+			"birth_date": [3, 4, 1998],
+			"death_date": [-1, -1, -1],
+			"family_id_is_child": 0,
+			"family_ids_is_parent": []
+		},
+		{
+			"id": 3,
+			"name": "Anujan Cenan",
+			"birth_date": [20, 1, 2005],
+			"death_date": [-1, -1, -1],
+			"family_id_is_child": 0,
+			"family_ids_is_parent": []
+		},
+		{
+			"id": 4,
+			"name": "Appama",
+			"birth_date": [3, 6, 1941],
+			"death_date": [25, 12, 2025],
+			"family_id_is_child": -1,
+			"family_ids_is_parent": [1]
+		},
+		{
+			"id": 5,
+			"name": "Appapa",
+			"birth_date": [1, 5, 1911],
+			"death_date": [2, 8, 2002],
+			"family_id_is_child": -1,
+			"family_ids_is_parent": [1]
+		}
+	],
+	"families": [
+		{
+			"id": 0,
+			"parent_1_id": 0,
+			"parent_2_id": 1,
+			"children_ids": [2, 3]
+		},
+		{
+			"id": 1,
+			"parent_1_id": 4,
+			"parent_2_id": 5,
+			"children_ids": [0]
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+    "people": [
+        {
+            "id": 0,
+            "name": "",
+            "birth_date": [],
+            "death_date": [],
+
+            "parents": [],
+            "family_ids_is_parent": [1, 2, 3]
+            
+        }
+    ],
+    "families": [
+        {
+            "id": 0,
+            "parent_1_id": 1,
+            "parent_2_id": 2,
+            "children_ids": [1, 2, 3, 4, 5, 6]
+        }
+    ]
+}
