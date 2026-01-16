@@ -9,17 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # We add "CONFIG" or "REQUIRED" to ensure it's found via Homebrew
 find_package(FLTK REQUIRED)
 
-# 3. Handle RapidJSON
-include(FetchContent)
-FetchContent_Declare(
-  rapidjson
-  GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
-  GIT_TAG        v1.1.0
-)
-FetchContent_GetProperties(rapidjson)
-if(NOT rapidjson_POPULATED)
-    FetchContent_Populate(rapidjson)
-endif()
+# 3. Handle rapidJSON
+find_package(RapidJSON REQUIRED)
 
 # 4. Collect Source Files
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")

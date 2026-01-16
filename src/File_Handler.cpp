@@ -64,7 +64,6 @@ void File_Handler::save_file(std::string file_name, All_People& all_people, All_
 
 rapidjson::Document File_Handler::load_file(std::string file_name)
 {
-    std::cout << "STAGE 1.1\n";
     std::ifstream f(file_name);
     if (!f.is_open())
     {
@@ -72,25 +71,19 @@ rapidjson::Document File_Handler::load_file(std::string file_name)
         exit(1);
     }
 
-    std::cout << "STAGE 1.3\n";
     rapidjson::IStreamWrapper isw{f};
     rapidjson::Document doc{};
     doc.ParseStream(isw);
 
-    std::cout << "STAGE 1.5\n";
     rapidjson::StringBuffer buffer{};
     rapidjson::Writer<rapidjson::StringBuffer> writer{buffer};
     doc.Accept(writer);
-
-    std::cout << "STAGE 1.8\n";
 
     if (doc.HasParseError())
     {
             std::cout << "Error  : " << doc.GetParseError()  << '\n'
                     << "Offset : " << doc.GetErrorOffset() << '\n';
     }
-    
-    std::cout << "STAGE 1.9\n";
 
     return doc;
 }
