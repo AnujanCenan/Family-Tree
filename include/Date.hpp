@@ -10,7 +10,8 @@ class Date
         Date(int _day, int _month, int _year);
 
         std::string stringify_date();
-
+        bool is_legitimate_date();
+        
         int year;
         int month;
         int day;

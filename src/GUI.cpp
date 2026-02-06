@@ -14,17 +14,20 @@
 
 #include "Widget_Sizes.hpp"
 
-int box_y_pos = 20;
-
 void bttn_click(Fl_Widget* widget, void* data)
 {
-    Fl_Scroll* scroll = static_cast<Fl_Scroll* >(data);
-    scroll->begin();
-    Fl_Box* box = new Fl_Box(10, box_y_pos, PERSON_BOX_WIDTH, PERSON_BOX_HEIGHT);
+    Fl_Pack* pack = static_cast<Fl_Pack *>(data);
+    Fl_Scroll* scroll = static_cast<Fl_Scroll*>(pack->parent());
+
+    pack->begin();
+    Fl_Box* box = new Fl_Box(0, 0, PERSON_BOX_WIDTH, PERSON_BOX_HEIGHT, "Person");
     box->box(FL_UP_BOX);
-    box_y_pos += (PERSON_BOX_HEIGHT + 10);
-    scroll->end();
+    // box_y_pos += (PERSON_BOX_HEIGHT + 10);
+    pack->end();
+    scroll->init_sizes();
     scroll->redraw();
+
+    scroll->scroll_to(scroll->xposition(), scroll->yposition() + PERSON_BOX_HEIGHT + 10);
 }
 
 int main(int argc, char** argv)
@@ -38,9 +41,14 @@ int main(int argc, char** argv)
     Fl_Button* bttn = new Fl_Button(10, 600, 100, 200, "Add Box");
 
     Fl_Scroll* scroll = new Fl_Scroll(10, 20, SCROLL_REGION_WIDTH, SCROLL_REGION_HEIGHT);
-    scroll->box(FL_UP_BOX);
+        scroll->box(FL_UP_BOX);
+        Fl_Pack* pack = new Fl_Pack(10, 20, SCROLL_REGION_WIDTH, SCROLL_REGION_HEIGHT);
+        pack->type(Fl_Pack::VERTICAL);
+        pack->spacing(10);
+        pack->end();
+    scroll->end();
 
-    bttn->callback(bttn_click, scroll);
+    bttn->callback(bttn_click, pack);
 
 
     window->end();

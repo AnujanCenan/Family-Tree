@@ -1,37 +1,37 @@
 cmake_minimum_required(VERSION 3.15)
-project(FamilyTreeProject VERSION 1.0 LANGUAGES CXX)
+project(FamilyTree VERSION 1.0 LANGUAGES CXX)
 
 # 1. Set C++ Standard
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 2. Find FLTK
-# We add "CONFIG" or "REQUIRED" to ensure it's found via Homebrew
+# 2. Find External Libraries (Homebrew)
 find_package(FLTK REQUIRED)
-
-# 3. Handle rapidJSON
 find_package(RapidJSON REQUIRED)
 
-# 4. Collect Source Files
+# 3. Collect Source Files
+# This picks up GUI.cpp, Person.cpp, Date.cpp, etc.
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-# 5. Define Executable
-add_executable(a.out ${SOURCES})
+# 4. Define Executable
+add_executable(family_tree ${SOURCES})
 
-target_compile_options(a.out PRIVATE -fsanitize=address -fno-omit-frame-pointer)
-target_link_options(a.out PRIVATE -fsanitize=address)
+# 5. Add Address Sanitizer (ASan)
+# Essential for catching memory leaks and pointer errors on macOS
+target_compile_options(family_tree PRIVATE -fsanitize=address -fno-omit-frame-pointer)
+target_link_options(family_tree PRIVATE -fsanitize=address)
 
 # 6. Include Directories
-# Added ${CMAKE_CURRENT_SOURCE_DIR} to make paths absolute
-target_include_directories(a.out SYSTEM PRIVATE 
+# This tells the compiler where to look for your .hpp files and library headers
+target_include_directories(family_tree SYSTEM PRIVATE 
     "${CMAKE_CURRENT_SOURCE_DIR}/include"
     ${FLTK_INCLUDE_DIR}
-    "${rapidjson_SOURCE_DIR}/include"
+    ${RAPIDJSON_INCLUDE_DIRS}
 )
 
 # 7. Link Libraries
-# On Mac, ${FLTK_LIBRARIES} contains the necessary paths to the .dylib files
-target_link_libraries(a.out PRIVATE ${FLTK_LIBRARIES})
+# RapidJSON is header-only, so we only need to link FLTK and Mac Frameworks
+target_link_libraries(family_tree PRIVATE ${FLTK_LIBRARIES})
 
-# Optional: Ensure the executable is placed in the root for easy access
-set_target_properties(a.out PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+# 8. (Optional) Put the executable in the root folder instead of inside /build
+set_target_properties(family_tree PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}")
